@@ -14,14 +14,12 @@
 **A Repository Containting Some _Branches_  And Some _Commits_ For Some Small Teams .**
 
 ## **Authors** :
-Ahmed Adel Mahmoud Bayoumi 37-19053 @ahmedadel2214
-Rana Ezzat 37-6815 @RanaEzzat
-Gharam Zakaria 37-16221 @gharam37 
+
 ------------
 
 - **Ahmed Adel Mahmoud Bayoumi**  *37-19053*            @ahmedadel2214
 - **Rana Ezzat** *37-6815*        @RanaEzzat
-
+- **Gharam Zakaria** *37-16221*        @gharam37
 
 ## **About** :
 -----------
