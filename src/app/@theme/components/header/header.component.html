@@ -1,17 +1,18 @@
 <div class="header-container left">
-  <div class="logo-containter">
-    <a (click)="toggleSidebar()" class="navigation">
-      <i class="nb-menu"></i>
-    </a>
-    <div class="logo" (click)="goToHome()">Angular-
-      <span>Seed-Project</span>
-    </div>
-  </div>
-  <ngx-theme-switcher></ngx-theme-switcher>
+	<div class="logo-containter">
+		<a (click)="toggleSidebar()" class="navigation">
+			<i class="nb-menu"></i>
+		</a>
+		<div class="logo" (click)="goToHome()">
+			<img class="imgHeader" src="assets/images/teamLogo.jpg"/>
+			<span>T-13 THE INVISIBLES</span>
+		</div>
+	</div>
+	<ngx-theme-switcher></ngx-theme-switcher>
 </div>
 
 <nb-actions size="medium" class="header-container right">
-  <nb-action>
-    <nb-user [menu]="userMenu" [name]="user?.username" (menuClick)="onMenuClick($event)"></nb-user>
-  </nb-action>
+	<nb-action>
+		<nb-user [menu]="userMenu" [name]="user?.username" [picture]="'assets/images/teamLogo.jpg'" (menuClick)="onMenuClick($event)"></nb-user>
+	</nb-action>
 </nb-actions>
