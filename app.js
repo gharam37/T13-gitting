@@ -5,6 +5,7 @@ const express = require('express'),
   helmet = require('helmet'),
   compression = require('compression'),
   bodyParser = require('body-parser'),
+  cookieParser = require('cookie-parser'),
   routes = require('./api/routes'),
   config = require('./api/config/Config'),
   app = express();
@@ -19,6 +20,8 @@ app.use(
     methods: ['GET', 'POST', 'PATCH', 'DELETE']
   })
 );
+
+app.use(cookieParser());
 app.use(helmet());
 app.use(compression());
 app.use(bodyParser.json());
@@ -27,6 +30,7 @@ app.use(
     extended: false
   })
 );
+
 app.use('/api', routes);
 
 // 500 internal server error handler
