@@ -44,10 +44,7 @@ import { AppComponent } from './app.component';
               endpoint: '/auth/request-pass',
               method: 'get',
             },
-            resetPass: {
-              endpoint: '/auth/reset-pass',
-              method: 'post',
-            },
+            
           },
         },
       },
