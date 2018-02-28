@@ -5,7 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ThemeModule } from './@theme/theme.module';
 import { NbEmailPassAuthProvider, NbAuthModule } from '@nebular/auth';
-import { NB_AUTH_TOKEN_WRAPPER_TOKEN, NbAuthJWTToken } from '@nebular/auth';
+//import { NB_AUTH_TOKEN_WRAPPER_TOKEN, NbAuthJWTToken } from '@nebular/auth';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -54,6 +54,6 @@ import { AppComponent } from './app.component';
     }),
   ],
   bootstrap: [AppComponent],
-  providers: [{ provide: APP_BASE_HREF, useValue: '/' }, { provide: NB_AUTH_TOKEN_WRAPPER_TOKEN, useValue: NbAuthJWTToken }]
+  providers: [{ provide: APP_BASE_HREF, useValue: '/' }]
 })
 export class AppModule {}
