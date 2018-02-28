@@ -24,6 +24,7 @@
     "@nebular/auth": "^2.0.0-rc.6",
     "@nebular/theme": "^2.0.0-rc.5",
     "@ng-bootstrap/ng-bootstrap": "^1.0.0",
+    "angular-smart-table": "^2.1.11",
     "angular2-toaster": "^4.0.1",
     "bcrypt-nodejs": "latest",
     "bcryptjs": "^2.4.3",
