@@ -31,3 +31,8 @@ module.exports.isObjectId = id => {
 module.exports.matchesRegex = (str, regex) => {
   return regex.test(str);
 };
+
+module.exports.isValidUser = body => {
+  // TODO VALID User
+  return true;
+};

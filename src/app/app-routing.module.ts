@@ -16,6 +16,10 @@ const routes: Routes = [
     loadChildren: './dashboard/dashboard.module#DashboardModule'
   },
   {
+    path: 'store',
+    loadChildren: './items/items.module#ItemsModule'
+  },
+  {
     path: 'auth',
     component: NbAuthComponent,
     children: [

@@ -5,9 +5,11 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 
 import { DashboardComponent } from './dashboard.component';
 
+// import { ItemsComponent } from './items/items.component';
+
 @NgModule({
   imports: [ThemeModule, DashboardRoutingModule],
-  declarations: [DashboardComponent],
+  declarations: [DashboardComponent],  // , ItemsComponent
   entryComponents: [],
   providers: []
 })

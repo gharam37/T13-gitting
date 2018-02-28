@@ -3,22 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { DashboardComponent } from './dashboard.component';
 
+// import { ItemsComponent } from './items/items.component';
+
 const routes: Routes = [
   {
     path: '',
-    component: DashboardComponent,
-    children: [
-      {
-        path: 'items',
-        loadChildren: './items/items.module#ItemsModule'
-      },
-      {
-        path: '',
-        redirectTo: 'items',
-        pathMatch: 'full'
-      }
-    ]
-  }
+    component: DashboardComponent
+  },
+  // { path: 'store', component: ItemsComponent, pathMatch: 'full' }
 ];
 
 @NgModule({
