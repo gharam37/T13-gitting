@@ -42,6 +42,7 @@ const routes: Routes = [
     ],
   },
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+    { path: 'register', redirectTo: 'auth/register', pathMatch: 'full' },
   { path: '**', redirectTo: 'dashboard' },
 
 ];
