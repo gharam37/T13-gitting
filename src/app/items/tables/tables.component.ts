@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
 
+import { TablesService } from './table.service';
 
 @Component({
   selector: 'ngx-smart-table',
@@ -14,10 +15,48 @@ import { LocalDataSource } from 'ng2-smart-table';
 export class TablesComponent {
 
   settings = {
+
+
+
+      columns: {
+          name: {
+          title: 'Name',
+          type: String,
+          required: true,
+          filter: true
+        },
+        price: {
+          title: 'Price',
+          type: Number,
+          required: true,
+          filter: true
+        },
+        CreatedAt: {
+          title: 'CreatedAt',
+          type: Date,
+          editable: false,
+          filter: true
+        },
+        UpdatedAt:{
+          title: 'UpdatedAt',
+          type: Date,
+          editable: false,
+          filter: true
+        },
+        SellerName:{
+          title: 'Seller Name',
+          type: String,
+          filter: true
+        }
+    },
+    actions: {
+      position: 'right'
+    },
     add: {
       addButtonContent: '<i class="nb-plus"></i>',
       createButtonContent: '<i class="nb-checkmark"></i>',
       cancelButtonContent: '<i class="nb-close"></i>',
+
     },
     edit: {
       editButtonContent: '<i class="nb-edit"></i>',
@@ -27,35 +66,79 @@ export class TablesComponent {
     delete: {
       deleteButtonContent: '<i class="nb-trash"></i>',
       confirmDelete: true,
-    },
-    columns: {
-      id: {
-        title: 'ID',
-        type: 'number',
-      },
-      firstName: {
-        title: 'First Name',
-        type: 'string',
-      },
-      lastName: {
-        title: 'Last Name',
-        type: 'string',
-      },
-      username: {
-        title: 'Username',
-        type: 'string',
-      },
-      email: {
-        title: 'E-mail',
-        type: 'string',
-      },
-      age: {
-        title: 'Age',
-        type: 'number',
-      },
-    },
-  };
+    }
+    };
 
 
+  source: LocalDataSource = new LocalDataSource();
 
+  constructor(private service: TablesService) {
+    const data = this.service.getData();
+    this.source.load(data);
+  }
+  onCreateConfirm(event): void {
+    if (window.confirm('Are you sure you want to delete?')) {
+      event.confirm.resolve();
+    } else {
+      event.confirm.reject();
+    }
+}
+
+onSaveConfirm(event): void {
+  if (window.confirm('Are you sure you want to delete?')) {
+    event.confirm.resolve();
+  } else {
+    event.confirm.reject();
+  }
+}
+
+onDeleteConfirm(event): void {
+  if (window.confirm('Are you sure you want to delete?')) {
+    event.confirm.resolve();
+  } else {
+    event.confirm.reject();
+  }
+}
+
+  source: LocalDataSource;
+
+  constructor() {
+    this.source = new LocalDataSource(this.data);
+  }
+
+  onSearch(query: string = '') {
+    this.source.setFilter([
+      // fields we want to include in the search
+
+      {
+        field: 'name',
+        type: String,
+        search: query
+      },
+      {
+        field: 'price',
+        type: Number,
+        search: query
+      },
+      {
+        field: 'seller-name',
+        type: String,
+        search: query
+      },
+      {
+        field: 'CreatedAt',
+        type: Date,
+        search: query
+      },
+      {
+        field: 'UpdatedAt',
+        type: Date,
+        search: query
+      }
+    ], false);
+    // second parameter specifying whether to perform 'AND' or 'OR' search
+    // (meaning all columns should contain search query or at least one)
+    // 'AND' by default, so changing to 'OR' by setting false here
+  }
+}
 }
