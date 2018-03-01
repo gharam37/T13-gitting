@@ -20,6 +20,9 @@ coverage
 .lock-wscript
 
 
+# Dependency directory
+# https://docs.npmjs.com/cli/shrinkwrap#caveats
+node_modules
 
 # Compiled binary addons (http://nodejs.org/api/v1/addons.html)
 build/Release
