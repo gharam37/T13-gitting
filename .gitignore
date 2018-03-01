@@ -19,11 +19,7 @@ coverage
 # node-waf configuration
 .lock-wscript
 
-!node_modules
 
-node_modules/*
-
-!node_modules/@nebular
 
 # Compiled binary addons (http://nodejs.org/api/v1/addons.html)
 build/Release
