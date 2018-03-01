@@ -15,40 +15,37 @@ import { TablesService } from './table.service';
 export class TablesComponent {
 
   settings = {
-
-
-
-      columns: {
-          name: {
-          title: 'Name',
-          type: String,
-          required: true,
-          filter: true
+    columns: {
+              name: {
+              title: 'Name',
+              type: String,
+              required: true,
+              filter: true
+            },
+            price: {
+              title: 'Price',
+              type: Number,
+              required: true,
+              filter: true
+            },
+            createdAt: {
+              title: 'CreatedAt',
+              type: Date,
+              editable: false,
+              filter: true,
+            },
+            updatedAt:{
+              title: 'UpdatedAt',
+              type: Date,
+              editable: false,
+              filter: true
+            },
+            sellerName:{
+              title: 'Seller Name',
+              type: String,
+              filter: true
+            }
         },
-        price: {
-          title: 'Price',
-          type: Number,
-          required: true,
-          filter: true
-        },
-        CreatedAt: {
-          title: 'CreatedAt',
-          type: Date,
-          editable: false,
-          filter: true,
-        },
-        UpdatedAt:{
-          title: 'UpdatedAt',
-          type: Date,
-          editable: true,
-          filter: true
-        },
-        SellerName:{
-          title: 'Seller Name',
-          type: String,
-          filter: true
-        }
-    },
     actions: {
       position: 'right'
     },
@@ -75,11 +72,16 @@ export class TablesComponent {
   source: LocalDataSource = new LocalDataSource();
 
   constructor(private service: TablesService) {
-    const data = this.service.getData();
-    this.source.load(data);
+    this.service.getData().then((res) => {
+      this.source.load(res);
+    })
+
   }
   onCreateConfirm(event): void {
     if (window.confirm('Are you sure you want to create?')) {
+      //
+      //TODO : HERE GOES THE LOGIC FOR INSERTION
+      //
       event.confirm.resolve();
     } else {
       event.confirm.reject();
@@ -88,6 +90,9 @@ export class TablesComponent {
 
 onSaveConfirm(event): void {
   if (window.confirm('Are you sure you want to update?')) {
+    //
+    //TODO : HERE GOES THE LOGIC FOR UPDATE
+    //
     event.confirm.resolve();
   } else {
     event.confirm.reject();
@@ -96,22 +101,18 @@ onSaveConfirm(event): void {
 
 onDeleteConfirm(event): void {
   if (window.confirm('Are you sure you want to delete?')) {
+    //
+    //TODO : HERE GOES LOGIC FOR DELETE
+    //
     event.confirm.resolve();
   } else {
     event.confirm.reject();
   }
 }
 
-  source: LocalDataSource;
-
-  constructor() {
-    this.source = new LocalDataSource(this.data);
-  }
-
   onSearch(query: string = '') {
     this.source.setFilter([
       // fields we want to include in the search
-
       {
         field: 'name',
         type: String,
@@ -123,17 +124,17 @@ onDeleteConfirm(event): void {
         search: query
       },
       {
-        field: 'seller-name',
+        field: 'sellerName',
         type: String,
         search: query
       },
       {
-        field: 'CreatedAt',
+        field: 'createdAt',
         type: Date,
         search: query
       },
       {
-        field: 'UpdatedAt',
+        field: 'updatedAt',
         type: Date,
         search: query
       }
@@ -142,5 +143,4 @@ onDeleteConfirm(event): void {
     // (meaning all columns should contain search query or at least one)
     // 'AND' by default, so changing to 'OR' by setting false here
   }
-}
 }

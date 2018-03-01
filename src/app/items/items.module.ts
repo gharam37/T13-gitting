@@ -4,7 +4,9 @@ import { ThemeModule } from '../@theme/theme.module';
 import { ItemsRoutingModule } from './items-routing.module';
 import { ItemsComponent } from './items.component';
 import { TablesComponent } from './tables/tables.component';
-import { TablesService } from './tables/table.service'
+import { TablesService } from './tables/table.service';
+
+
 @NgModule({
   imports: [ThemeModule, ItemsRoutingModule, Ng2SmartTableModule,],
   declarations: [ItemsComponent,TablesComponent],

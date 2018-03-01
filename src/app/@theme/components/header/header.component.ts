@@ -26,8 +26,6 @@ export class HeaderComponent implements OnInit {
        this.user = token.getPayload();
      }
    });
-
-  //TODO GHARAM
   }
 
   ngOnInit() {
@@ -45,12 +43,10 @@ export class HeaderComponent implements OnInit {
 
   onMenuClick(event) {
     if (event.title === 'Logout') {
-      //TODO LOGOUT LOGIC
-
-      this.router.navigate(['auth/logout'])
+      this.router.navigate(['auth/logout']);
     }
     if (event.title === 'Login / Signup') {
-      this.router.navigate(['auth'])
+      this.router.navigate(['auth']);
     }
   }
 }

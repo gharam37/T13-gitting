@@ -15,7 +15,6 @@ router.delete('/auth/sign-out', asyncMiddleware(authCtrl.logout));
 
 
 //-----------------------------Block The Rest From Unauthorized User------------------------
-
 // Route Middleware To Verify a Token
 router.use( (req, res, next) =>  {
   const token = req.body.token || req.query.token || req.headers['x-access-token'];
