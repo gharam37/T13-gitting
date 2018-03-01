@@ -20,12 +20,12 @@ export class HeaderComponent implements OnInit {
     private authService: NbAuthService,
     private router: Router
   ) {
-  //   this.authService.onTokenChange()
-  //  .subscribe((token: NbAuthJWTToken) => {
-  //    if (token.isValid()) {
-  //      this.user = token.getPayload();
-  //    }
-  //  });
+    this.authService.onTokenChange()
+   .subscribe((token: NbAuthJWTToken) => {
+     if (token.isValid()) {
+       this.user = token.getPayload();
+     }
+   });
 
   //TODO GHARAM
   }
@@ -47,7 +47,7 @@ export class HeaderComponent implements OnInit {
     if (event.title === 'Logout') {
       //TODO LOGOUT LOGIC
 
-      this.router.navigate(['dashboard'])
+      this.router.navigate(['auth/logout'])
     }
     if (event.title === 'Login / Signup') {
       this.router.navigate(['auth'])

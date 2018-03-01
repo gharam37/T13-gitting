@@ -33,6 +33,5 @@ module.exports.matchesRegex = (str, regex) => {
 };
 
 module.exports.isValidUser = body => {
-  // TODO VALID User
-  return true;
+  return body.fullName && body.email && (body.password.length > 5);
 };

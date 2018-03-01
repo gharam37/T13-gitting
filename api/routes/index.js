@@ -11,7 +11,7 @@ const express     = require('express'),
 //-------------------------------------------Auth------------------------------------------
 router.post('/auth/sign-up', asyncMiddleware(authCtrl.signup));
 router.post('/auth/sign-in', asyncMiddleware(authCtrl.login));
-router.post('/auth/sign-out', asyncMiddleware(authCtrl.logout));
+router.delete('/auth/sign-out', asyncMiddleware(authCtrl.logout));
 
 
 //-----------------------------Block The Rest From Unauthorized User------------------------
