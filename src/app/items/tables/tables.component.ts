@@ -35,12 +35,12 @@ export class TablesComponent {
           title: 'CreatedAt',
           type: Date,
           editable: false,
-          filter: true
+          filter: true,
         },
         UpdatedAt:{
           title: 'UpdatedAt',
           type: Date,
-          editable: false,
+          editable: true,
           filter: true
         },
         SellerName:{
@@ -56,12 +56,14 @@ export class TablesComponent {
       addButtonContent: '<i class="nb-plus"></i>',
       createButtonContent: '<i class="nb-checkmark"></i>',
       cancelButtonContent: '<i class="nb-close"></i>',
+      confirmCreate:true,
 
     },
     edit: {
       editButtonContent: '<i class="nb-edit"></i>',
       saveButtonContent: '<i class="nb-checkmark"></i>',
       cancelButtonContent: '<i class="nb-close"></i>',
+      confirmEdit:true,
     },
     delete: {
       deleteButtonContent: '<i class="nb-trash"></i>',
@@ -77,7 +79,7 @@ export class TablesComponent {
     this.source.load(data);
   }
   onCreateConfirm(event): void {
-    if (window.confirm('Are you sure you want to delete?')) {
+    if (window.confirm('Are you sure you want to create?')) {
       event.confirm.resolve();
     } else {
       event.confirm.reject();
@@ -85,7 +87,7 @@ export class TablesComponent {
 }
 
 onSaveConfirm(event): void {
-  if (window.confirm('Are you sure you want to delete?')) {
+  if (window.confirm('Are you sure you want to update?')) {
     event.confirm.resolve();
   } else {
     event.confirm.reject();
