@@ -6,7 +6,6 @@ import {
   NbRegisterComponent,
   NbLogoutComponent,
   NbRequestPasswordComponent,
-  NbResetPasswordComponent,
 } from '@nebular/auth';
 
 
@@ -15,7 +14,7 @@ const routes: Routes = [
     path: 'dashboard',
     loadChildren: './dashboard/dashboard.module#DashboardModule'
   },
-  {
+ {
     path: 'store',
     loadChildren: './items/items.module#ItemsModule'
   },
