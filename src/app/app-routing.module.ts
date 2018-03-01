@@ -6,7 +6,6 @@ import {
   NbRegisterComponent,
   NbLogoutComponent,
   NbRequestPasswordComponent,
-  NbResetPasswordComponent,
 } from '@nebular/auth';
 
 
@@ -14,6 +13,10 @@ const routes: Routes = [
   {
     path: 'dashboard',
     loadChildren: './dashboard/dashboard.module#DashboardModule'
+  },
+ {
+    path: 'store',
+    loadChildren: './items/items.module#ItemsModule'
   },
   {
     path: 'auth',
@@ -38,6 +41,7 @@ const routes: Routes = [
     ],
   },
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+  { path: 'register', redirectTo: 'auth/register', pathMatch: 'full' },
   { path: '**', redirectTo: 'dashboard' },
 
 ];

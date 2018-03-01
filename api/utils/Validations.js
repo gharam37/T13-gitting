@@ -31,3 +31,7 @@ module.exports.isObjectId = id => {
 module.exports.matchesRegex = (str, regex) => {
   return regex.test(str);
 };
+
+module.exports.isValidUser = body => {
+  return body.fullName && body.email && (body.password.length > 5);
+};

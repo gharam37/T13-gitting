@@ -1,20 +1,33 @@
 const mongoose = require('mongoose'),
   jwt          = require('jsonwebtoken'),
   User         = mongoose.model('User'),
-  config       = require('../config/Config');
+  config       = require('../config/Config'),
+  Validations       = require('../utils/Validations'),
+  ROLES        = require('../config/Roles').ROLES;
 
 
 module.exports.signup = async (req, res) => {
+  if (!Validations.isValidUser(req.body)) {
+    return res.status(422).json({
+      err: null,
+      msg: 'Not Valid User Info',
+      data: null
+    });
+  }
   const newUser = new User();
-  newUser.name = req.body.name;
+  newUser.name = req.body.fullName;
   newUser.email = req.body.email;
   newUser.password = newUser.generateHash(req.body.password);
+  newUser.role = req.body.role?
+    (((req.body.role === ROLES.admin) || (req.body.role === ROLES.manager) || (req.body.role === ROLES.viewer))?
+      req.body.role : ROLES.viewer) : ROLES.viewer;
 
   newUser.save().then(user => {
     console.log('Registered');
     const payload = {
       id: user._id,
-      admin: user.admin
+      name: user.name,
+      role: user.role
     };
     const token = jwt.sign(payload, config.SECRET, {expiresIn:'48h'});
     res.status(200).json({
@@ -30,7 +43,8 @@ module.exports.login = async (req, res) => {
       {
         const payload = {
           id: user._id,
-          admin: user.admin
+          name: user.name,
+          role: user.role
         };
         const token = jwt.sign(payload, config.SECRET, {expiresIn:'48h'});
         return res.status(200).json({
@@ -45,14 +59,5 @@ module.exports.login = async (req, res) => {
 };
 
 module.exports.logout = async (req, res) => {
-  jwt.verify(req.headers['x-access-token'], config.SECRET, function(err, decoded) {
-    if (err) {
-      return res.json({ success: false, message: 'Failed to authenticate token.' });
-    } else {
-      // if everything is good, save to request for use in other routes
-      req.decoded = decoded;
-      console.log(decoded);
-
-    }
-  });
+  res.status(200).json({});
 };

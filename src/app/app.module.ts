@@ -5,6 +5,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ThemeModule } from './@theme/theme.module';
 import { NbEmailPassAuthProvider, NbAuthModule } from '@nebular/auth';
+import { NB_AUTH_TOKEN_CLASS, NbAuthJWTToken } from '@nebular/auth';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -15,6 +17,7 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     NgbModule.forRoot(),
     ThemeModule.forRoot(),
     AppRoutingModule,
@@ -38,23 +41,24 @@ import { AppComponent } from './app.component';
            },
            logout: {
               endpoint: '/auth/sign-out',
-              method: 'post',
+              redirect: {
+                success: '/dashboard',
+                failure: null,
+              },
             },
             requestPass: {
               endpoint: '/auth/request-pass',
               method: 'get',
             },
-            resetPass: {
-              endpoint: '/auth/reset-pass',
-              method: 'post',
-            },
+
           },
         },
+
       },
       forms: {},
     }),
   ],
   bootstrap: [AppComponent],
-  providers: [{ provide: APP_BASE_HREF, useValue: '/' }]
+  providers: [{ provide: APP_BASE_HREF, useValue: '/' },{ provide: NB_AUTH_TOKEN_CLASS, useValue: NbAuthJWTToken }]
 })
 export class AppModule {}

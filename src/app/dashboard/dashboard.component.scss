@@ -1,22 +1,23 @@
-nb-card{
-width:90%;
-height:90%;
-border-radius:25px;
-background:#73AD21;
-padding:20px;
+.nbCard{
+  width:90%;
+  height:90%;
+  border-radius:25px;
+  background: linear-gradient(to top, rgba(90,230,140,0.6), rgba(90,230,140,1), rgba(90,230,140,0.6));
+  padding:20px;
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
 }
 .column{
 width:32%
 }
 .imgCard{
-max-width:100%;
-max-height:100%;
+width:90%;
+height:100%;
 display:block;
 margin-left:auto;
 margin-right:auto;
+overflow: hidden;
 }
 .nbCardHeader{
 color:black;
 text-align:center;
 }
- 
