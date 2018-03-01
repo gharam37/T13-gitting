@@ -5,12 +5,12 @@ import { NbMenuItem } from '@nebular/theme/components/menu/menu.service';
 @Component({
   selector: 'app-items',
   //styleUrls: ['./dashboard.component.scss'],
-  templateUrl: './items.component.html'
-
+  template: '<ngx-main-layout><nb-menu [items]="menu"></nb-menu><router-outlet></router-outlet></ngx-main-layout>'
 })
 export class ItemsComponent implements OnInit {
   menu: NbMenuItem[];
 
   ngOnInit() {
     this.menu = MENU_ITEMS;
-  
+  }
+}
