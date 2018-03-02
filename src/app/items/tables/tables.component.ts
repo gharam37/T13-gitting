@@ -79,9 +79,11 @@ export class TablesComponent {
   }
   onCreateConfirm(event): void {
     if (window.confirm('Are you sure you want to create?')) {
-      //
-      //TODO : HERE GOES THE LOGIC FOR INSERTION
-      //
+      
+      this.service.createProduct({name:event.newData['name'],price:event.newData['price']}).subscribe((response)=>{
+      console.log(response)});
+
+      
       event.confirm.resolve();
     } else {
       event.confirm.reject();
@@ -90,9 +92,9 @@ export class TablesComponent {
 
 onSaveConfirm(event): void {
   if (window.confirm('Are you sure you want to update?')) {
-    //
-    //TODO : HERE GOES THE LOGIC FOR UPDATE
-    //
+    this.service.updateProduct({name:event.newData['name'],price:event.newData['price']},event.data._id).subscribe((response)=>{
+      console.log(response)});
+    
     event.confirm.resolve();
   } else {
     event.confirm.reject();
@@ -101,9 +103,8 @@ onSaveConfirm(event): void {
 
 onDeleteConfirm(event): void {
   if (window.confirm('Are you sure you want to delete?')) {
-    //
-    //TODO : HERE GOES LOGIC FOR DELETE
-    //
+    this.service.deleteProduct(event.data._id).subscribe((response)=>{
+      console.log(response)});
     event.confirm.resolve();
   } else {
     event.confirm.reject();
