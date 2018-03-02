@@ -1,9 +1,13 @@
 <router-outlet>
 <nb-card>
   <nb-card-body>
+      <h6 id="message" style="text-align:center;"></h6>
     <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)" (editConfirm)="onSaveConfirm($event)"
- (createConfirm)="onCreateConfirm($event)" >
+ (createConfirm)="onCreateConfirm($event)" (userRowSelect)="onUserRowSelect($event)">
     </ng2-smart-table>
   </nb-card-body>
+  <nb-card-footer >
+    <h6 style="text-align:center;">you can search by writing in the first row and you can purchase with a click on any Item</h6>
+  </nb-card-footer>
 </nb-card>
 </router-outlet>

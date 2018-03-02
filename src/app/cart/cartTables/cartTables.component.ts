@@ -60,12 +60,12 @@ export class CartTablesComponent {
 
 
   source: LocalDataSource = new LocalDataSource();
-
+  price: number = 0;
   constructor(private service: CartTablesService) {
     this.service.getData()
     .then(res =>
       {
-      this.source.load(res)
+      this.source.load(res);
       this.price=0;
       for (const x of res) {
       this.price += x.price;
@@ -79,11 +79,11 @@ export class CartTablesComponent {
   onDeleteConfirm(event): void {
     if (window.confirm('Are You Sure You Want To Delete?')) {
       this.service.DeleteData(event.data._id)
-      .then(res =>
-        event.confirm.resolve()
+      .then(res =>{
+        event.confirm.resolve();
         this.price-=event.data.price;
         document.getElementById('priceTag').style.visibility='hidden';
-      )
+      })
       .catch(err => {
         window.alert('Please Sign In To See Your Cart');
         event.confirm.reject();

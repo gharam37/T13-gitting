@@ -25,25 +25,16 @@ export class CartTablesService implements Injectable {
       .subscribe(token => {
       this.token = token.getValue()
       this.http.get<Products>(API_URL+'/cart/getItems?token='+this.token)
-      .subscribe(products =>
+      .subscribe(cartItem =>
         {
-          this.data = map(products.data,'productId');
+          this.data = map(cartItem.data,'productId');
           resolve(this.data);
         }, err => reject(err));
       });
     });
   }
 
-  insertData(body) {
-    return new Promise<any>((resolve, reject) => {
-      this.authService.getToken()
-      .subscribe(token => {
-      this.token = token.getValue()
-      this.http.post<Products>(API_URL+'/cart/createItem?token='+this.token, body)
-      .subscribe(product => resolve(product), err => reject(err));
-      });
-    });
-  }
+
 
   DeleteData(id) {
     return new Promise<any>((resolve, reject) => {

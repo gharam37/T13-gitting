@@ -65,8 +65,23 @@ export class TablesService implements Injectable {
       });
     });
   }
-}
 
+  InsertItem(id) {
+    return new Promise<any>((resolve, reject) => {
+      this.authService.getToken()
+      .subscribe(token => {
+      this.token = token.getValue()
+      this.http.post<Products>(API_URL+'/cart/createItem?token='+this.token,{productId:id})
+      .subscribe(product => resolve(product), err => reject(err));
+      });
+    });
+  }
+}
+export interface cartItem{
+  err: any,
+  msg: any,
+  data: any[]
+};
 export interface Products {
   err : any,
   msg : any,

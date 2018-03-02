@@ -3,6 +3,7 @@ import { LocalDataSource } from 'ng2-smart-table';
 import { DomSanitizer } from '@angular/platform-browser';
 import { TablesService } from './table.service';
 
+
 @Component({
   selector: 'ngx-smart-table',
   templateUrl: './tables.component.html',
@@ -46,17 +47,6 @@ export class TablesComponent {
               editable: false,
               filter: true
             },
-            checkbox: {
-
-
-              title: 'Re-Assiiiiign',
-              type: 'html',
-              valuePrepareFunction: (value) => { return this._sanitizer.bypassSecurityTrustHtml(this.input); },
-              filter: false
-            },
-
-
-
         },
     actions: {
       selectMode: 'multi',
@@ -88,8 +78,9 @@ export class TablesComponent {
 
 
   source: LocalDataSource = new LocalDataSource();
-
+  message: string = "";
   constructor(private service: TablesService) {
+    this.message="";
     this.service.getData()
     .then(res => this.source.load(res))
     .catch(err => window.alert('Please Sign In To See Our Products'));
@@ -100,10 +91,12 @@ export class TablesComponent {
     if (window.confirm('Are You Sure You Want To Create?')) {
       this.service.insertData(event.newData)
       .then(res => {
-        this.service.getData().then( res => {
-          this.source.load(res);
+        this.service.getData().then(res => {
+            this.source.load(res);
           event.confirm.resolve();
-        });
+        document.getElementById('message').innerHTML=event.newData.name+" has been created";
+
+        })
       })
       .catch(err => {
         if (err.status === 401)
@@ -117,13 +110,17 @@ export class TablesComponent {
     }
 }
 
-onSaveConfirm(event: any): void {
+onSaveConfirm(event): void {
+  document.getElementById('message').innerHTML="";
   if (window.confirm('Are You Sure You Want To Update?')) {
-    this.service.UpdateData(event.data._id, event.newData)
+    this.service.UpdateData(event.newData._id, event.newData)
     .then(res => {
-      this.service.getData().then( res => {
-        this.source.load(res);
-      });
+      this.service.getData().then(res => {
+          this.source.load(res);
+        event.confirm.resolve();
+      document.getElementById('message').innerHTML=event.newData.name+" has been updated";
+
+      })
     })
     .catch(err => {
       if (err.status === 401)
@@ -138,9 +135,13 @@ onSaveConfirm(event: any): void {
 }
 
 onDeleteConfirm(event): void {
+  document.getElementById('message').innerHTML="";
   if (window.confirm('Are You Sure You Want To Delete?')) {
-    this.service.DeleteData(event.data._id)
-    .then(res => event.confirm.resolve())
+    this.service.DeleteData(event.newData._id)
+    .then(res => {
+      event.confirm.resolve();
+    document.getElementById('message').innerHTML=event.data.name+" has been deleted";
+  })
     .catch(err => {
       window.alert('Sorry, You Are Not Authorized To Delete Products :(');
       event.confirm.reject();
@@ -149,38 +150,16 @@ onDeleteConfirm(event): void {
     event.confirm.reject();
   }
 }
+onUserRowSelect(event): void {
+  document.getElementById('message').innerHTML="";
+  if (window.confirm('Are You Sure You Want To purchase this Product?')) {
+    this.service.InsertItem(event.data._id)
+    .then(res =>{
+        document.getElementById('message').innerHTML=event.data.name+" has been purchased, check your cart to see it";
+    })
+      .catch(err => window.alert('Sorry, You Are Not Authorized To purchase this Product :'));
+    }
 
-  onSearch(query: string = '') {
-    this.source.setFilter([
-      // fields we want to include in the search
-      {
-        field: 'name',
-        type: String,
-        search: query
-      },
-      {
-        field: 'price',
-        type: Number,
-        search: query
-      },
-      {
-        field: 'sellerName',
-        type: String,
-        search: query
-      },
-      {
-        field: 'createdAt',
-        type: Date,
-        search: query
-      },
-      {
-        field: 'updatedAt',
-        type: Date,
-        search: query
-      }
-    ], false);
-    // second parameter specifying whether to perform 'AND' or 'OR' search
-    // (meaning all columns should contain search query or at least one)
-    // 'AND' by default, so changing to 'OR' by setting false here
   }
+
 }
