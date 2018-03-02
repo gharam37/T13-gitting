@@ -61,6 +61,7 @@ export class TablesComponent {
       saveButtonContent: '<i class="nb-checkmark"></i>',
       cancelButtonContent: '<i class="nb-close"></i>',
       confirmEdit:true,
+      confirmSave:true,
     },
     delete: {
       deleteButtonContent: '<i class="nb-trash"></i>',
@@ -78,23 +79,41 @@ export class TablesComponent {
 
   }
   onCreateConfirm(event): void {
-    if (window.confirm('Are you sure you want to create?')) {
-      //
-      //TODO : HERE GOES THE LOGIC FOR INSERTION
-      //
-      event.confirm.resolve();
-    } else {
-      event.confirm.reject();
-    }
-}
+     if (window.confirm('Are you sure you want to create?')) {
+    //   //
+    //   //TODO : HERE GOES THE LOGIC FOR INSERTION
+       this.service.insertData(event.newData).then((res) => {//insert the service i did and pass to it parameters on action
 
+         this.service.getData().then((res) => {//just like constructor 
+           this.source.load(res);
+      })
+       })
+
+    //   //TODO ENDS HERE
+       event.confirm.resolve();
+     
+    } else {
+       event.confirm.reject();
+     }
+  }
+    
 onSaveConfirm(event): void {
   if (window.confirm('Are you sure you want to update?')) {
     //
     //TODO : HERE GOES THE LOGIC FOR UPDATE
     //
-    event.confirm.resolve();
-  } else {
+    this.service.updateData(event.newData, event.data._id).then((res) => {//insert the service i did to updatee items through event that listens to action
+      
+      this.service.getData().then((res) => {//just like constructor 
+        this.source.load(res);
+
+      })
+    })
+    ///end here
+    //event.confirm.reject();
+  } 
+
+else {
     event.confirm.reject();
   }
 }
@@ -103,7 +122,18 @@ onDeleteConfirm(event): void {
   if (window.confirm('Are you sure you want to delete?')) {
     //
     //TODO : HERE GOES LOGIC FOR DELETE
-    //
+    this.service.deleteData(event.data._id).then((res) => {//insert the service i did to delete items through event that listens to action
+
+      this.service.getData().then((res) => {//just like constructor 
+        this.source.load(res);
+
+      })
+    })
+    ///end here
+
+
+
+    //ENDS HERE
     event.confirm.resolve();
   } else {
     event.confirm.reject();
