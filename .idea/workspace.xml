@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ee6d5d3b-6ead-44b7-817f-cd6e7a68d2b9" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/app/items/tables/table.service.ts" afterPath="$PROJECT_DIR$/src/app/items/tables/table.service.ts" />
       <change beforePath="$PROJECT_DIR$/src/app/items/tables/tables.component.ts" afterPath="$PROJECT_DIR$/src/app/items/tables/tables.component.ts" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -51,14 +49,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="tables.component.ts" pinned="false" current-in-tab="false">
+      <file leaf-file-name="tables.component.ts" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/app/items/tables/tables.component.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="116" column="0" lean-forward="false" selection-start-line="116" selection-start-column="0" selection-end-line="116" selection-end-column="0" />
+            <state relative-caret-position="289">
+              <caret line="126" column="8" lean-forward="false" selection-start-line="126" selection-start-column="8" selection-end-line="126" selection-end-column="8" />
               <folding>
                 <element signature="e#0#44#0" expanded="true" />
-                <marker date="1520003134176" expanded="true" signature="452:498" ph="{...}" />
+                <marker date="1520004432565" expanded="true" signature="452:498" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -74,11 +72,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="table.service.ts" pinned="false" current-in-tab="true">
+      <file leaf-file-name="table.service.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/app/items/tables/table.service.ts">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="17">
-              <caret line="32" column="11" lean-forward="true" selection-start-line="32" selection-start-column="11" selection-end-line="32" selection-end-column="11" />
+              <caret line="32" column="5" lean-forward="true" selection-start-line="32" selection-start-column="5" selection-end-line="32" selection-end-column="5" />
               <folding>
                 <element signature="e#0#43#0" expanded="true" />
               </folding>
@@ -100,8 +98,8 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>editConfirm</find>
       <find>onSaveConfirm</find>
+      <find>editConfirm</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -245,12 +243,12 @@
       <workItem from="1519753758405" duration="2178000" />
       <workItem from="1519756038505" duration="473000" />
       <workItem from="1519835960641" duration="2467000" />
-      <workItem from="1519998128676" duration="4214000" />
+      <workItem from="1519998128676" duration="5437000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="9616000" />
+    <option name="totallyTimeSpent" value="10839000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -647,13 +645,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/items/tables/tables.component.ts">
+    <entry file="file://$PROJECT_DIR$/src/app/items/tables/table.service.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="116" column="0" lean-forward="false" selection-start-line="116" selection-start-column="0" selection-end-line="116" selection-end-column="0" />
+        <state relative-caret-position="17">
+          <caret line="32" column="5" lean-forward="true" selection-start-line="32" selection-start-column="5" selection-end-line="32" selection-end-column="5" />
           <folding>
-            <element signature="e#0#44#0" expanded="true" />
-            <marker date="1520003134176" expanded="true" signature="452:498" ph="{...}" />
+            <element signature="e#0#43#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -666,12 +663,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/items/tables/table.service.ts">
+    <entry file="file://$PROJECT_DIR$/src/app/items/tables/tables.component.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="32" column="11" lean-forward="true" selection-start-line="32" selection-start-column="11" selection-end-line="32" selection-end-column="11" />
+        <state relative-caret-position="289">
+          <caret line="126" column="8" lean-forward="false" selection-start-line="126" selection-start-column="8" selection-end-line="126" selection-end-column="8" />
           <folding>
-            <element signature="e#0#43#0" expanded="true" />
+            <element signature="e#0#44#0" expanded="true" />
+            <marker date="1520004432565" expanded="true" signature="452:498" ph="{...}" />
           </folding>
         </state>
       </provider>

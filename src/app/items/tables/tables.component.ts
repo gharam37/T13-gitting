@@ -122,6 +122,9 @@ export class TablesComponent {
         } else {
             event.confirm.reject();
         }
+
+
+        
     }
 
     onDeleteConfirm(event): void {
