@@ -4,7 +4,7 @@ import { LocalDataSource } from 'ng2-smart-table';
 import {Products, TablesService} from './table.service';
 import { HttpClient } from '@angular/common/http';
 import {NbAuthService} from "@nebular/auth";
-import {createProduct} from '/api/controllers/ProductController';
+
 
 const API_URL = 'http://localhost:3000/api';
 @Component({
