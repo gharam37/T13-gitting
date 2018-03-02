@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { NbAuthJWTToken, NbAuthService } from '@nebular/auth';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'lodash';
+import { map, filter } from 'lodash';
 
 const API_URL = 'http://localhost:3000/api';
 
@@ -27,8 +27,16 @@ export class CartTablesService implements Injectable {
       this.http.get<Products>(API_URL+'/cart/getItems?token='+this.token)
       .subscribe(cartItem =>
         {
-          this.data = map(cartItem.data,'productId');
-          resolve(this.data);
+          const res = map(cartItem.data,'productId');
+          if(res.length)
+          {
+            this.data = filter(res, r => r ? true : false);
+            resolve(this.data);
+          }
+          else
+          {
+            resolve([]);
+          }
         }, err => reject(err));
       });
     });

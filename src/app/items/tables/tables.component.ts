@@ -92,10 +92,8 @@ export class TablesComponent {
       this.service.insertData(event.newData)
       .then(res => {
         this.service.getData().then(res => {
-            this.source.load(res);
-          event.confirm.resolve();
-        document.getElementById('message').innerHTML=event.newData.name+" has been created";
-
+          this.source.load(res);
+          document.getElementById('message').innerHTML=event.newData.name+" has been created";
         })
       })
       .catch(err => {
@@ -117,14 +115,12 @@ onSaveConfirm(event): void {
     .then(res => {
       this.service.getData().then(res => {
           this.source.load(res);
-        event.confirm.resolve();
       document.getElementById('message').innerHTML=event.newData.name+" has been updated";
-
       })
     })
     .catch(err => {
       if (err.status === 401)
-        window.alert('Sorry, You Are Not Authorized To Create Products :(');
+        window.alert('Sorry, You Are Not Authorized To Update Products :(');
       else
         window.alert('Please Enter A Valid Product Information');
       event.confirm.reject();
@@ -137,7 +133,7 @@ onSaveConfirm(event): void {
 onDeleteConfirm(event): void {
   document.getElementById('message').innerHTML="";
   if (window.confirm('Are You Sure You Want To Delete?')) {
-    this.service.DeleteData(event.newData._id)
+    this.service.DeleteData(event.data._id)
     .then(res => {
       event.confirm.resolve();
     document.getElementById('message').innerHTML=event.data.name+" has been deleted";
@@ -159,7 +155,5 @@ onUserRowSelect(event): void {
     })
       .catch(err => window.alert('Sorry, You Are Not Authorized To purchase this Product :'));
     }
-
   }
-
 }

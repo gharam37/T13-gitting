@@ -61,16 +61,18 @@ export class CartTablesComponent {
 
   source: LocalDataSource = new LocalDataSource();
   price: number = 0;
+
   constructor(private service: CartTablesService) {
     this.service.getData()
     .then(res =>
       {
-      this.source.load(res);
-      this.price=0;
-      for (const x of res) {
-      this.price += x.price;
-      }
-    })
+        this.source.load(res);
+        this.price=0;
+        for (const x of res) {
+          if(x)
+            this.price += x.price;
+        }
+      })
      .catch(err => window.alert('Please Sign In To See Your Cart'));
 
      // this.price = 50
