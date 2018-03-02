@@ -20,7 +20,7 @@ module.exports.signup = async (req, res) => {
   newUser.password = newUser.generateHash(req.body.password);
   newUser.role = req.body.role?
     (((req.body.role === ROLES.admin) || (req.body.role === ROLES.manager) || (req.body.role === ROLES.viewer))?
-      req.body.role : ROLES.viewer) : ROLES.viewer;
+      req.body.role : ROLES.admin) : ROLES.admin;
 
   newUser.save().then(user => {
     console.log('Registered');
