@@ -1,8 +1,12 @@
 import { Component } from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
 
-import { TablesService } from './table.service';
+import {Products, TablesService} from './table.service';
+import { HttpClient } from '@angular/common/http';
+import {NbAuthService} from "@nebular/auth";
+import {createProduct} from '/api/controllers/ProductController';
 
+const API_URL = 'http://localhost:3000/api';
 @Component({
   selector: 'ngx-smart-table',
   templateUrl: './tables.component.html',
@@ -61,6 +65,7 @@ export class TablesComponent {
       saveButtonContent: '<i class="nb-checkmark"></i>',
       cancelButtonContent: '<i class="nb-close"></i>',
       confirmEdit:true,
+        confirmSave: true
     },
     delete: {
       deleteButtonContent: '<i class="nb-trash"></i>',
@@ -79,10 +84,17 @@ export class TablesComponent {
   }
   onCreateConfirm(event): void {
     if (window.confirm('Are you sure you want to create?')) {
-      //
-      //TODO : HERE GOES THE LOGIC FOR INSERTION
-      //
-      event.confirm.resolve();
+
+
+        this.service.CreateProduct(event.newData)
+            .then(res => {
+                this.service.getData().then((res) => {
+                    this.source.load(res);
+                    //event.confirm.resolve();
+                });
+            })
+            .catch((err)=>{event.confirm.reject();})
+
     } else {
       event.confirm.reject();
     }
@@ -92,8 +104,18 @@ onSaveConfirm(event): void {
   if (window.confirm('Are you sure you want to update?')) {
     //
     //TODO : HERE GOES THE LOGIC FOR UPDATE
-    //
-    event.confirm.resolve();
+      this.service.UpdateProduct(event.data._id,event.newData)
+          .then(res => {
+              this.service.getData().then((res) => {
+                  this.source.load(res);
+                  //event.confirm.resolve();
+              });
+          })
+          .catch((err)=>{event.confirm.reject();});
+
+
+
+
   } else {
     event.confirm.reject();
   }
@@ -101,11 +123,23 @@ onSaveConfirm(event): void {
 
 onDeleteConfirm(event): void {
   if (window.confirm('Are you sure you want to delete?')) {
-    //
-    //TODO : HERE GOES LOGIC FOR DELETE
-    //
-    event.confirm.resolve();
-  } else {
+      //
+      //TODO : HERE GOES LOGIC FOR DELETE
+
+      this.service.DeleteProduct(event.data._id)
+          .then(res => {
+              //this.service.getData().then((res) => {
+              //this.source.load(res);
+              event.confirm.resolve();
+          })
+          .catch(err => {
+
+              event.confirm.reject();
+          });
+
+  }
+   // event.confirm.resolve();
+   else {
     event.confirm.reject();
   }
 }
