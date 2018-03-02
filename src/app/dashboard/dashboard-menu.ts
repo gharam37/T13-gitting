@@ -6,5 +6,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
     title: 'Store',
     icon: 'fa fa-shopping-basket',
     link: '/store'
+  },
+  {
+    title: 'Cart',
+    icon: 'fa fa-shopping-cart',
+    link: '/cart'
   }
 ];

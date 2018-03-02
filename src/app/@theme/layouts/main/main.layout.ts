@@ -24,11 +24,7 @@ import 'rxjs/add/operator/delay';
       <nb-sidebar class="menu-sidebar"
                    tag="menu-sidebar"
                    responsive>
-        <nb-sidebar-header>
-          <button class="btn btn-hero-success main-btn">
-            <span>Navigate</span>
-          </button>
-        </nb-sidebar-header>
+       
         <ng-content select="nb-menu"></ng-content>
       </nb-sidebar>
 

@@ -4,7 +4,8 @@ const express     = require('express'),
   config          = require('../config/Config'),
   jwt             = require('jsonwebtoken'),
   authCtrl     = require('../controllers/AuthController'),
-  productCtrl     = require('../controllers/ProductController');
+  productCtrl     = require('../controllers/ProductController'),
+  cartCtrl     = require('../controllers/ItemController');
 
 
 
@@ -41,6 +42,8 @@ router.use( (req, res, next) =>  {
   }
 });
 
+
+
 //---------------------------------------Product Routes-----------------------------------
 router.get('/product/getProducts', asyncMiddleware(productCtrl.getProducts));
 router.get('/product/getProduct/:productId', asyncMiddleware(productCtrl.getProduct));
@@ -52,6 +55,12 @@ router.post('/product/createProduct', asyncMiddleware(productCtrl.createProduct)
 router.patch('/product/updateProduct/:productId', asyncMiddleware(productCtrl.updateProduct));
 router.delete('/product/deleteProduct/:productId', asyncMiddleware(productCtrl.deleteProduct));
 
+
+//--------------------------------------Cart Routes------------------------------------------
+
+router.get('/cart/getItems', asyncMiddleware(cartCtrl.getItems));
+router.post('/cart/createItem', asyncMiddleware(cartCtrl.createItem));
+router.delete('/cart/deleteItem/:productId', asyncMiddleware(cartCtrl.deleteItem));
 
 //-------------------------------Return Router----------------------------------------------------
 module.exports = router;
