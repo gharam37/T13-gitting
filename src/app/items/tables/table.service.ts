@@ -18,22 +18,57 @@ export class TablesService implements Injectable {
   private authService: NbAuthService,
   ) {}
 
+  createData(record) {
+    return new Promise<any[]>((resolve, reject) => {
+      this.authService.getToken()
+      .subscribe(token => {
+      this.token = token.getValue()
+      this.http.post<Products>(API_URL+'/product/createProduct?token='+this.token,record).subscribe(products =>{
+        console.log("Created");;});
+      });
+    });
+  } // get data 
+
+
+  deleteData(record) {
+    return new Promise<any[]>((resolve, reject) => {
+      this.authService.getToken()
+      .subscribe(token => {
+      this.token = token.getValue()
+      this.http.delete<Products>(API_URL+'/product/deleteProduct/'+record+'?token='+this.token).subscribe(products =>{
+        console.log("deleted");});
+      });
+    });
+  } //delete Data 
+
+
+  editData(record,dataAlter) {
+    return new Promise<any[]>((resolve, reject) => {
+      this.authService.getToken()
+      .subscribe(token => {
+      this.token = token.getValue()
+      this.http.patch<Products>(API_URL+'/product/updateProduct/'+record+'?token='+this.token,dataAlter).subscribe(products =>{
+        console.log("edit");});
+      });
+    });
+  } //delete Data 
+
+
+
   getData() {
     return new Promise<any[]>((resolve, reject) => {
       this.authService.getToken()
       .subscribe(token => {
       this.token = token.getValue()
-      this.http.get<Products>(API_URL+'/product/getProducts?token='+this.token)
-      .subscribe(products =>
-        {
+      this.http.get<Products>(API_URL+'/product/getProducts?token='+this.token).subscribe(products =>{
           this.data = products.data;
-          resolve(this.data);
-        });
+          console.log(this.data);
+          console.log('hi');
+          resolve(this.data);});
       });
     });
-  }
-}
-
+  } // get data 
+} // class
 export interface Products {
   err : any,
   msg : any,

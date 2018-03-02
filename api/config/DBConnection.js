@@ -70,5 +70,9 @@ mongoose
       });
   });
 
+//router.get('/thelist',function(req,res,next))
+
+
 require('../models/Product');
 require('../models/User');
+

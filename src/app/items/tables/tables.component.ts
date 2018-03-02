@@ -60,7 +60,7 @@ export class TablesComponent {
       editButtonContent: '<i class="nb-edit"></i>',
       saveButtonContent: '<i class="nb-checkmark"></i>',
       cancelButtonContent: '<i class="nb-close"></i>',
-      confirmEdit:true,
+      confirmSave:true,
     },
     delete: {
       deleteButtonContent: '<i class="nb-trash"></i>',
@@ -75,6 +75,7 @@ export class TablesComponent {
     this.service.getData().then((res) => {
       this.source.load(res);
     })
+    
 
   }
   onCreateConfirm(event): void {
@@ -82,6 +83,10 @@ export class TablesComponent {
       //
       //TODO : HERE GOES THE LOGIC FOR INSERTION
       //
+      this.service.createData(event.newData).then(res => {
+        this.service.getData().then( res => {this.source.load(res);});
+      })
+     
       event.confirm.resolve();
     } else {
       event.confirm.reject();
@@ -93,6 +98,11 @@ onSaveConfirm(event): void {
     //
     //TODO : HERE GOES THE LOGIC FOR UPDATE
     //
+    this.service.editData(event.data._id,event.newData).then(res => {
+      this.service.getData().then(res => event.confirm.resolve());
+    })
+    // 
+    
     event.confirm.resolve();
   } else {
     event.confirm.reject();
@@ -104,6 +114,11 @@ onDeleteConfirm(event): void {
     //
     //TODO : HERE GOES LOGIC FOR DELETE
     //
+
+    this.service.deleteData(event.data._id).then(res => {
+
+      this.service.getData().then(res => event.confirm.resolve());
+    })
     event.confirm.resolve();
   } else {
     event.confirm.reject();
