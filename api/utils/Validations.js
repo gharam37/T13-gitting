@@ -35,3 +35,7 @@ module.exports.matchesRegex = (str, regex) => {
 module.exports.isValidUser = body => {
   return body.fullName && body.email && (body.password.length > 5);
 };
+
+module.exports.isValidItem = (decoded, pid) => {
+  return decoded && pid && decoded.id && mongoose.Types.ObjectId.isValid(pid);
+};

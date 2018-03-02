@@ -76,56 +76,15 @@ export class TablesComponent {
   constructor(private service: TablesService) {
     this.service.getData()
     .then(res => this.source.load(res))
-    .catch(err => window.alert('Please Sign In To See Our Products'));
+    .catch(err => window.alert('Please Sign In To See Your Cart'));
   }
-
-
-  onCreateConfirm(event): void {
-    if (window.confirm('Are You Sure You Want To Create?')) {
-      this.service.insertData(event.newData)
-      .then(res => {
-        this.service.getData().then( res => {
-          this.source.load(res);
-        });
-      })
-      .catch(err => {
-        if (err.status === 401)
-          window.alert('Sorry, You Are Not Authorized To Edit Products :(');
-        else
-          window.alert('Please Enter A Valid Product Information');
-        event.confirm.reject();
-      });
-    } else {
-      event.confirm.reject();
-    }
-}
-
-onSaveConfirm(event: any): void {
-  if (window.confirm('Are You Sure You Want To Update?')) {
-    this.service.UpdateData(event.data._id, event.newData)
-    .then(res => {
-      this.service.getData().then( res => {
-        this.source.load(res);
-      });
-    })
-    .catch(err => {
-      if (err.status === 401)
-        window.alert('Sorry, You Are Not Authorized To Create Products :(');
-      else
-        window.alert('Please Enter A Valid Product Information');
-      event.confirm.reject();
-    });
-  } else {
-    event.confirm.reject();
-  }
-}
 
 onDeleteConfirm(event): void {
   if (window.confirm('Are You Sure You Want To Delete?')) {
     this.service.DeleteData(event.data._id)
     .then(res => event.confirm.resolve())
     .catch(err => {
-      window.alert('Sorry, You Are Not Authorized To Delete Products :(');
+      window.alert('Please Sign In To See Your Cart');
       event.confirm.reject();
     });
   } else {
