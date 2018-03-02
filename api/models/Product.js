@@ -1,4 +1,10 @@
+//const mongoose = require('mongoose');
 const mongoose = require('mongoose');
+var mongoDB = 'http://localhost:3000/';
+mongoose.connect(mongoDB);
+mongoose.Promise = global.Promise;
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 const productSchema = mongoose.Schema({
   name: {
@@ -27,23 +33,24 @@ mongoose.model('Product', productSchema);
 var Product =mongoose.model('Product',productSchema);
 
 var p1 =new Product( {
-  name: 'abc',
+  name: 'shirt',
   price: 12,
-  sellerName:'Gharam',
+  sellerName:'Mary'
 
 });
 var p2 =new Product( {
-    name: 'abb',
+    name: 'shoes',
     price: 12,
     sellerName:'Mary',
 
 });
 var p3 =new Product( {
-    name: 'ab33',
+    name: 'short',
     price: 123,
-    sellerName:'Abdullah',
+    sellerName:'Mary',
 
 });
+
 var p4 =new Product( {
     name: 'aaabc',
     price: 12,
@@ -74,5 +81,7 @@ p4.save(function(error) {
         console.error(error);
     }
 });
+
+//mongoose.ProductSchema.push(p1);
 //db.productSchema.insert( p1 )
 //mongoose.connection.collection(productSchema).insert(p1);
