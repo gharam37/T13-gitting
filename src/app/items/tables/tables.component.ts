@@ -83,6 +83,7 @@ export class TablesComponent {
       this.service.createRow(event.newData).then((res)=> {
         this.service.getData().then((res)=>{
         this.source.load(res);
+        event.confirm.resolve();
       })
       }).catch((err) => {
         event.confirm.reject();
@@ -99,6 +100,8 @@ onSaveConfirm(event): void {
     this.service.updateRow(event.newData,event.data._id).then((res)=> {
       this.service.getData().then((res)=>{
       this.source.load(res);
+      event.confirm.resolve();
+
     })
     }).catch((err) => {
       event.confirm.reject();
