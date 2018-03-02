@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
-
+import { DomSanitizer } from '@angular/platform-browser';
 import { TablesService } from './table.service';
 
 @Component({
@@ -45,11 +45,25 @@ export class TablesComponent {
               type: String,
               editable: false,
               filter: true
-            }
+            },
+            checkbox: {
+
+
+              title: 'Re-Assiiiiign',
+              type: 'html',
+              valuePrepareFunction: (value) => { return this._sanitizer.bypassSecurityTrustHtml(this.input); },
+              filter: false
+            },
+
+
+
         },
     actions: {
-      position: 'right'
+      selectMode: 'multi',
+      position: 'right',
+
     },
+
     add: {
       addButtonContent: '<i class="nb-plus"></i>',
       createButtonContent: '<i class="nb-checkmark"></i>',
@@ -68,6 +82,8 @@ export class TablesComponent {
       deleteButtonContent: '<i class="nb-trash"></i>',
       confirmDelete: true,
     }
+  //or something
+
     };
 
 
@@ -86,6 +102,7 @@ export class TablesComponent {
       .then(res => {
         this.service.getData().then( res => {
           this.source.load(res);
+          event.confirm.resolve();
         });
       })
       .catch(err => {

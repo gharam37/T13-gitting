@@ -8,7 +8,7 @@ const API_URL = 'http://localhost:3000/api';
 
 @Injectable()
 
-export class TablesService implements Injectable {
+export class CartTablesService implements Injectable {
 
   data : any[];
   token: String;

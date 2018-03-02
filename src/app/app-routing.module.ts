@@ -20,7 +20,7 @@ const routes: Routes = [
   },
   {
      path: 'cart',
-     loadChildren: './cart/items.module#ItemsModule'
+     loadChildren: './cart/cart.module#CartModule'
    },
   {
     path: 'auth',

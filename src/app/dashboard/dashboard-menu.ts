@@ -9,7 +9,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: 'Cart',
-    icon: 'fa fa-shopping-basket',
+    icon: 'fa fa-shopping-cart',
     link: '/cart'
   }
 ];
