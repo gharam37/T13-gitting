@@ -43,6 +43,7 @@ export class TablesComponent {
             sellerName:{
               title: 'Seller Name',
               type: String,
+              editable: false,
               filter: true
             }
         },
@@ -61,6 +62,7 @@ export class TablesComponent {
       saveButtonContent: '<i class="nb-checkmark"></i>',
       cancelButtonContent: '<i class="nb-close"></i>',
       confirmEdit:true,
+      confirmSave: true,
     },
     delete: {
       deleteButtonContent: '<i class="nb-trash"></i>',
@@ -72,39 +74,60 @@ export class TablesComponent {
   source: LocalDataSource = new LocalDataSource();
 
   constructor(private service: TablesService) {
-    this.service.getData().then((res) => {
-      this.source.load(res);
-    })
-
+    this.service.getData()
+    .then(res => this.source.load(res))
+    .catch(err => window.alert('Please Sign In To See Our Products'));
   }
+
+
   onCreateConfirm(event): void {
-    if (window.confirm('Are you sure you want to create?')) {
-      //
-      //TODO : HERE GOES THE LOGIC FOR INSERTION
-      //
-      event.confirm.resolve();
+    if (window.confirm('Are You Sure You Want To Create?')) {
+      this.service.insertData(event.newData)
+      .then(res => {
+        this.service.getData().then( res => {
+          this.source.load(res);
+        });
+      })
+      .catch(err => {
+        if (err.status === 401)
+          window.alert('Sorry, You Are Not Authorized To Edit Products :(');
+        else
+          window.alert('Please Enter A Valid Product Information');
+        event.confirm.reject();
+      });
     } else {
       event.confirm.reject();
     }
 }
 
-onSaveConfirm(event): void {
-  if (window.confirm('Are you sure you want to update?')) {
-    //
-    //TODO : HERE GOES THE LOGIC FOR UPDATE
-    //
-    event.confirm.resolve();
+onSaveConfirm(event: any): void {
+  if (window.confirm('Are You Sure You Want To Update?')) {
+    this.service.UpdateData(event.data._id, event.newData)
+    .then(res => {
+      this.service.getData().then( res => {
+        this.source.load(res);
+      });
+    })
+    .catch(err => {
+      if (err.status === 401)
+        window.alert('Sorry, You Are Not Authorized To Create Products :(');
+      else
+        window.alert('Please Enter A Valid Product Information');
+      event.confirm.reject();
+    });
   } else {
     event.confirm.reject();
   }
 }
 
 onDeleteConfirm(event): void {
-  if (window.confirm('Are you sure you want to delete?')) {
-    //
-    //TODO : HERE GOES LOGIC FOR DELETE
-    //
-    event.confirm.resolve();
+  if (window.confirm('Are You Sure You Want To Delete?')) {
+    this.service.DeleteData(event.data._id)
+    .then(res => event.confirm.resolve())
+    .catch(err => {
+      window.alert('Sorry, You Are Not Authorized To Delete Products :(');
+      event.confirm.reject();
+    });
   } else {
     event.confirm.reject();
   }
