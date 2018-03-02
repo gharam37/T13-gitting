@@ -82,8 +82,9 @@ export class TablesComponent {
     if (window.confirm('Are you sure you want to create?')) {
       this.service.createRow(event.newData).then((res)=> {
         this.service.getData().then((res)=>{
-        this.source.load(res);
         event.confirm.resolve();
+        this.source.load(res);
+
       })
       }).catch((err) => {
         event.confirm.reject();
@@ -99,8 +100,8 @@ onSaveConfirm(event): void {
 
     this.service.updateRow(event.newData,event.data._id).then((res)=> {
       this.service.getData().then((res)=>{
-      this.source.load(res);
       event.confirm.resolve();
+      this.source.load(res);
 
     })
     }).catch((err) => {
@@ -126,37 +127,5 @@ onDeleteConfirm(event): void {
   }
 }
 
-  onSearch(query: string = '') {
-    this.source.setFilter([
-      // fields we want to include in the search
-      {
-        field: 'name',
-        type: String,
-        search: query
-      },
-      {
-        field: 'price',
-        type: Number,
-        search: query
-      },
-      {
-        field: 'sellerName',
-        type: String,
-        search: query
-      },
-      {
-        field: 'createdAt',
-        type: Date,
-        search: query
-      },
-      {
-        field: 'updatedAt',
-        type: Date,
-        search: query
-      }
-    ], false);
-    // second parameter specifying whether to perform 'AND' or 'OR' search
-    // (meaning all columns should contain search query or at least one)
-    // 'AND' by default, so changing to 'OR' by setting false here
-  }
+
 }
