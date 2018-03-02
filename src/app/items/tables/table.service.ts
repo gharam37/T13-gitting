@@ -32,6 +32,45 @@ export class TablesService implements Injectable {
       });
     });
   }
+  ProductCreation(object) {
+        return new Promise<any[]>((resolve, reject) => {
+            this.authService.getToken()
+                .subscribe(token => {
+                    this.token = token.getValue()
+                    this.http.post<Products>(API_URL+'/product/createProduct?token='+this.token, object)
+                        .subscribe(products =>
+                        {
+                           resolve(this.data);
+                        });
+                });
+        });
+    }
+    ProductEdition(object,id) {
+        return new Promise<any[]>((resolve, reject) => {
+            this.authService.getToken()
+                .subscribe(token => {
+                    this.token = token.getValue()
+                    this.http.patch<Products>(API_URL+'/product/updateProduct/'+id+'?token='+this.token,object)
+                        .subscribe(products =>
+                        {
+                            resolve(this.data);
+                        });
+                });
+        });
+    }
+    ProductDeletion(id) {
+        return new Promise<any[]>((resolve, reject) => {
+            this.authService.getToken()
+                .subscribe(token => {
+                    this.token = token.getValue()
+                    this.http.delete<Products>(API_URL+'/product/deleteProduct/'+id+'?token='+this.token)
+                        .subscribe(products =>
+                        {
+                            resolve(this.data);
+                        });
+                });
+        });
+    }
 }
 
 export interface Products {
