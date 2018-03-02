@@ -52,6 +52,7 @@
     "ng2-smart-table": "^1.2.2",
     "ng2-smart-table-extended": "^1.0.19",
     "ng2-tree": "^2.0.0-rc.6",
+    "nodemon": "^1.17.1",
     "normalize.css": "^7.0.0",
     "pace-js": "^1.0.2",
     "passport": "~0.3.2",
