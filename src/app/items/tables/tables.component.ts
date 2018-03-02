@@ -82,12 +82,13 @@ export class TablesComponent {
   constructor(private service: TablesService,
               private http: HttpClient) {
     this.service.getData().then((res) => {
-      this.source.load(res);
+      this.source.load(res)
+
     }
 
 
 
-    );
+    ).catch(err => window.alert('Sign in to View items'));;
 
 
   }
