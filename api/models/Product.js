@@ -1,4 +1,16 @@
 const mongoose = require('mongoose');
+mongoose.connect('http://localhost:3000');
+
+var db = mongoose.connection;
+
+db.on('error', function (err) {
+    console.log('connection error', err);
+});
+db.once('open', function () {
+    console.log('connected.');
+});
+
+
 
 const productSchema = mongoose.Schema({
   name: {
@@ -22,4 +34,24 @@ const productSchema = mongoose.Schema({
   updatedAt: Date
 });
 
-mongoose.model('Product', productSchema);
+var Product =mongoose.model('Product',productSchema);
+
+/*var p1 =new Product( {
+    name: 'blue t-shirt',
+    price: 12,
+    sellerName:'Gharam',
+
+});
+var p2 =new Product( {
+    name: 'black t-shirt',
+    price: 30,
+    sellerName:'Gharam',
+
+});
+p1.save(function(error) {
+         console.log("Your bee has been saved!");
+    if (error) {
+             console.error(error);
+          }
+    });
+*/

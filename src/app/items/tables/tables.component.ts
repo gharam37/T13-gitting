@@ -2,6 +2,10 @@ import { Component } from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
 
 import { TablesService } from './table.service';
+import { HttpClient } from '@angular/common/http';
+const API_URL = 'http://localhost:3000/api';
+
+
 
 @Component({
   selector: 'ngx-smart-table',
@@ -14,7 +18,9 @@ import { TablesService } from './table.service';
 })
 export class TablesComponent {
 
-  settings = {
+
+
+    settings = {
     columns: {
               name: {
               title: 'Name',
@@ -60,6 +66,7 @@ export class TablesComponent {
       editButtonContent: '<i class="nb-edit"></i>',
       saveButtonContent: '<i class="nb-checkmark"></i>',
       cancelButtonContent: '<i class="nb-close"></i>',
+        confirmSave: true,
       confirmEdit:true,
     },
     delete: {
@@ -70,45 +77,72 @@ export class TablesComponent {
 
 
   source: LocalDataSource = new LocalDataSource();
+  token: String;
 
-  constructor(private service: TablesService) {
+  constructor(private service: TablesService,
+              private http: HttpClient) {
     this.service.getData().then((res) => {
       this.source.load(res);
-    })
-
-  }
-  onCreateConfirm(event): void {
-    if (window.confirm('Are you sure you want to create?')) {
-      //
-      //TODO : HERE GOES THE LOGIC FOR INSERTION
-      //
-      event.confirm.resolve();
-    } else {
-      event.confirm.reject();
     }
-}
 
-onSaveConfirm(event): void {
-  if (window.confirm('Are you sure you want to update?')) {
-    //
-    //TODO : HERE GOES THE LOGIC FOR UPDATE
-    //
-    event.confirm.resolve();
-  } else {
-    event.confirm.reject();
-  }
-}
 
-onDeleteConfirm(event): void {
-  if (window.confirm('Are you sure you want to delete?')) {
-    //
-    //TODO : HERE GOES LOGIC FOR DELETE
-    //
-    event.confirm.resolve();
-  } else {
-    event.confirm.reject();
+
+    );
+
+
   }
-}
+    onCreateConfirm(event): void {
+        if (window.confirm('Are You Sure You Want To Create?')) {
+            this.service.CreateProduct(event.newData)
+                .then(res => {
+                    this.service.getData().then( res => {
+                        this.source.load(res);
+                    });
+                })
+                .catch(err => {
+                    if (err.status === 401)
+                        window.alert('You dont have access rights to create items  !');
+                    else
+                        window.alert('enter correct product information');
+                    event.confirm.reject();
+                });
+        } else {
+            event.confirm.reject();
+        }
+    }
+
+    onSaveConfirm(event: any): void {
+        if (window.confirm('Are You Sure You Want To Update?')) {
+            this.service.UpdateProduct(event.data._id, event.newData)
+                .then(res => {
+                    this.service.getData().then( res => {
+                        this.source.load(res);
+                    });
+                })
+                .catch(err => {
+                    if (err.status === 401)
+                        window.alert('You dont have access rights to update items  !');
+                    else
+                        window.alert('enter correct product information');
+                    event.confirm.reject();
+                });
+        } else {
+            event.confirm.reject();
+        }
+    }
+
+    onDeleteConfirm(event): void {
+        if (window.confirm('Are You Sure You Want To Delete?')) {
+            this.service.DeleteProduct(event.data._id)
+                .then(res => event.confirm.resolve())
+                .catch(err => {
+                    window.alert('You dont have access rights to delete items !');
+                    event.confirm.reject();
+                });
+        } else {
+            event.confirm.reject();
+        }
+    }
 
   onSearch(query: string = '') {
     this.source.setFilter([

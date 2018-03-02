@@ -18,20 +18,53 @@ export class TablesService implements Injectable {
   private authService: NbAuthService,
   ) {}
 
-  getData() {
-    return new Promise<any[]>((resolve, reject) => {
-      this.authService.getToken()
-      .subscribe(token => {
-      this.token = token.getValue()
-      this.http.get<Products>(API_URL+'/product/getProducts?token='+this.token)
-      .subscribe(products =>
-        {
-          this.data = products.data;
-          resolve(this.data);
+    getData() {
+        return new Promise<any[]>((resolve, reject) => {
+            this.authService.getToken()
+                .subscribe(token => {
+                    this.token = token.getValue()
+                    this.http.get<Products>(API_URL+'/product/getProducts?token='+this.token)
+                        .subscribe(products =>
+                        {
+                            this.data = products.data;
+                            resolve(this.data);
+                        }, err => reject(err));
+                });
         });
-      });
-    });
-  }
+    }
+
+    CreateProduct(body) {
+        return new Promise<any>((resolve, reject) => {
+            this.authService.getToken()
+                .subscribe(token => {
+                    this.token = token.getValue()
+                    this.http.post<Products>(API_URL+'/product/createProduct?token='+this.token, body)
+                        .subscribe(product => resolve(product), err => reject(err));
+                });
+        });
+    }
+
+    DeleteProduct(id) {
+        return new Promise<any>((resolve, reject) => {
+            this.authService.getToken()
+                .subscribe(token => {
+                    this.token = token.getValue()
+                    this.http.delete<Products>(API_URL+'/product/deleteProduct/'+id+'?token='+this.token)
+                        .subscribe(product => resolve(product), err => reject(err));
+                });
+        });
+    }
+
+    UpdateProduct(id, newData) {
+        return new Promise<any>((resolve, reject) => {
+            this.authService.getToken()
+                .subscribe(token => {
+                    this.token = token.getValue()
+                    this.http.patch<Products>(API_URL+'/product/updateProduct/'+id+'?token='+this.token, newData)
+                        .subscribe(product => resolve(product), err => reject(err));
+                });
+        });
+    }
 }
 
 export interface Products {
